@@ -8,16 +8,57 @@ class BottlesSong
   end
 
   def verse(number)
+    "#{inventory(number).to_s.capitalize} #{container(number)} of #{liquid} #{location}, " +
+    "#{inventory(number)} #{container(number)} of #{liquid}.\n" +
+    "#{action(number)}, " +
+    "#{inventory(number-1)} #{container(number-1)} of #{liquid} #{location}.\n"
+  end
+
+  private
+
+  def liquid
+    'beer'
+  end
+
+  def location
+    'on the wall'
+  end
+
+  def action(number)
     case number
     when 0
-      "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
-    when 1
-      "1 bottle of beer on the wall, 1 bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-    when 2
-      "2 bottles of beer on the wall, 2 bottles of beer.\nTake one down and pass it around, 1 bottle of beer on the wall.\n"
+      "Go to the store and buy some more"
     else
-      "#{number} bottles of beer on the wall, #{number} bottles of beer.\nTake one down and pass it around, #{number-1} bottles of beer on the wall.\n"
+      "Take #{pronoun(number)} down and pass it around"
+    end
+  end
+
+  def inventory(number)
+    case number
+    when -1
+      99
+    when 0
+      'no more'
+    else
+      number
+    end
+  end
+
+  def container(number)
+    case number
+    when 1
+      'bottle'
+    else
+      'bottles'
+    end
+  end
+
+  def pronoun(number)
+    case number
+    when 1
+      'it'
+    else
+      'one'
     end
   end
 end
-
