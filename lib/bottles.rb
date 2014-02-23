@@ -19,10 +19,10 @@ class BeerVerse
   end
 
   def to_s
-    "#{inventory} #{container} of #{liquid} #{location}, ".capitalize +
-    "#{inventory} #{container} of #{liquid}.\n" +
+    "#{starting_inventory} #{starting_container} of #{liquid} #{location}, ".capitalize +
+    "#{starting_inventory} #{starting_container} of #{liquid}.\n" +
     "#{action}, " +
-    "#{inventory(number-1)} #{container(number-1)} of #{liquid} #{location}.\n"
+    "#{ending_inventory} #{ending_container} of #{liquid} #{location}.\n"
   end
 
   private
@@ -35,6 +35,24 @@ class BeerVerse
     'on the wall'
   end
 
+  def starting_inventory
+    case number
+    when 0
+      'no more'
+    else
+      number
+    end
+  end
+
+  def starting_container
+    case number
+    when 1
+      'bottle'
+    else
+      'bottles'
+    end
+  end
+
   def action
     case number
     when 0
@@ -44,32 +62,32 @@ class BeerVerse
     end
   end
 
-  def inventory(i = number)
-    case i
-    when -1
-      99
-    when 0
-      'no more'
-    else
-      i
-    end
-  end
-
-  def container(i = number)
-    case i
-    when 1
-      'bottle'
-    else
-      'bottles'
-    end
-  end
-
   def pronoun
     case number
     when 1
       'it'
     else
       'one'
+    end
+  end
+
+  def ending_inventory
+    case number
+    when 0
+      99
+    when 1
+      'no more'
+    else
+      number - 1
+    end
+  end
+
+  def ending_container
+    case number
+    when 2
+      'bottle'
+    else
+      'bottles'
     end
   end
 end
