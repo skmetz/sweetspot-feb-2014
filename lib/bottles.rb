@@ -8,9 +8,20 @@ class BottlesSong
   end
 
   def verse(number)
-    "#{inventory(number).to_s.capitalize} #{container(number)} of #{liquid} #{location}, " +
-    "#{inventory(number)} #{container(number)} of #{liquid}.\n" +
-    "#{action(number)}, " +
+    BeerVerse.new(number).to_s
+  end
+end
+
+class BeerVerse
+  attr_reader :number
+  def initialize(number)
+    @number = number
+  end
+
+  def to_s
+    "#{inventory} #{container} of #{liquid} #{location}, ".capitalize +
+    "#{inventory} #{container} of #{liquid}.\n" +
+    "#{action}, " +
     "#{inventory(number-1)} #{container(number-1)} of #{liquid} #{location}.\n"
   end
 
@@ -24,28 +35,28 @@ class BottlesSong
     'on the wall'
   end
 
-  def action(number)
+  def action
     case number
     when 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun(number)} down and pass it around"
+      "Take #{pronoun} down and pass it around"
     end
   end
 
-  def inventory(number)
-    case number
+  def inventory(i = number)
+    case i
     when -1
       99
     when 0
       'no more'
     else
-      number
+      i
     end
   end
 
-  def container(number)
-    case number
+  def container(i = number)
+    case i
     when 1
       'bottle'
     else
@@ -53,7 +64,7 @@ class BottlesSong
     end
   end
 
-  def pronoun(number)
+  def pronoun
     case number
     when 1
       'it'
@@ -62,3 +73,4 @@ class BottlesSong
     end
   end
 end
+
