@@ -13,9 +13,10 @@ class BottlesSong
 end
 
 class BeerVerse
-  attr_reader :number
+  attr_reader :fragments
+
   def initialize(number)
-    @number = number
+    @fragments = BeerVerseFragments.new(number)
   end
 
   def to_s
@@ -33,6 +34,34 @@ class BeerVerse
 
   def location
     'on the wall'
+  end
+
+  def starting_inventory
+    fragments.starting_inventory
+  end
+
+  def starting_container
+    fragments.starting_container
+  end
+
+  def action
+    fragments.action
+  end
+
+  def ending_inventory
+    fragments.ending_inventory
+  end
+
+  def ending_container
+    fragments.ending_container
+  end
+end
+
+class BeerVerseFragments
+  attr_reader :number
+
+  def initialize(number)
+    @number = number
   end
 
   def starting_inventory
@@ -62,15 +91,6 @@ class BeerVerse
     end
   end
 
-  def pronoun
-    case number
-    when 1
-      'it'
-    else
-      'one'
-    end
-  end
-
   def ending_inventory
     case number
     when 0
@@ -88,6 +108,17 @@ class BeerVerse
       'bottle'
     else
       'bottles'
+    end
+  end
+
+  private
+
+  def pronoun
+    case number
+    when 1
+      'it'
+    else
+      'one'
     end
   end
 end
