@@ -1,3 +1,5 @@
+require 'forwardable'
+
 class BottlesSong
   def sing
     verses(99, 0)
@@ -8,24 +10,21 @@ class BottlesSong
   end
 
   def verse(number)
-    BeerVerse.new(number).to_s
+    BeerVerse.new(BeerVerseFragments.for(number)).to_s
   end
 end
 
 class BeerVerse
+  extend Forwardable
+  def_delegators :fragments,
+                     :starting_inventory, :starting_container,
+                     :action,
+                     :ending_inventory, :ending_container
+
   attr_reader :fragments
 
-  def initialize(number)
-    case number
-    when 0
-      @fragments = BeerVerseFragments0.new(number)
-    when 1
-      @fragments = BeerVerseFragments1.new(number)
-    when 2
-      @fragments = BeerVerseFragments2.new(number)
-    else
-      @fragments = BeerVerseFragments.new(number)
-    end
+  def initialize(fragments)
+    @fragments = fragments
   end
 
   def to_s
@@ -44,29 +43,18 @@ class BeerVerse
   def location
     'on the wall'
   end
-
-  def starting_inventory
-    fragments.starting_inventory
-  end
-
-  def starting_container
-    fragments.starting_container
-  end
-
-  def action
-    fragments.action
-  end
-
-  def ending_inventory
-    fragments.ending_inventory
-  end
-
-  def ending_container
-    fragments.ending_container
-  end
 end
 
 class BeerVerseFragments
+
+  def self.for(number)
+    begin
+      Object.const_get("BeerVerseFragments#{number}").new(number)
+    rescue
+      BeerVerseFragments.new(number)
+    end
+  end
+
   attr_reader :number
 
   def initialize(number)
