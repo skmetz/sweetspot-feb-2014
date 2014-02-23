@@ -1,0 +1,4 @@
+# Logfile created on 2014-02-23 15:34:37 -0800 by logger.rb/44203
+I, [2014-02-23T15:34:37.024064 #30546]  INFO -- : 0:  rake (10.1.1) from /Users/skm/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/rake-10.1.1.gemspec
+I, [2014-02-23T15:34:37.024424 #30546]  INFO -- : 0:  minitest (4.7.5) from /Users/skm/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/default/minitest-4.7.5.gemspec
+I, [2014-02-23T15:34:37.024766 #30546]  INFO -- : 0:  bundler (1.5.1) from /Users/skm/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/specifications/bundler-1.5.1.gemspec
