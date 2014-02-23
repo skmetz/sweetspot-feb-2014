@@ -16,7 +16,12 @@ class BeerVerse
   attr_reader :fragments
 
   def initialize(number)
-    @fragments = BeerVerseFragments.new(number)
+    case number
+    when 0
+      @fragments = BeerVerseFragments0.new(number)
+    else
+      @fragments = BeerVerseFragments.new(number)
+    end
   end
 
   def to_s
@@ -65,12 +70,7 @@ class BeerVerseFragments
   end
 
   def starting_inventory
-    case number
-    when 0
-      'no more'
-    else
-      number
-    end
+    number
   end
 
   def starting_container
@@ -121,5 +121,13 @@ class BeerVerseFragments
       'one'
     end
   end
+end
+
+class BeerVerseFragments0 < BeerVerseFragments
+
+  def starting_inventory
+    'no more'
+  end
+
 end
 
