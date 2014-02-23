@@ -13,7 +13,7 @@ $ bundle install
 
 ## 99 Bottles of Beer
 
-Write the code that will output the lyrics to the song
+Your task is to write the _simplest_ possible code that will output the lyrics to the song
 _99 Bottles of Beer_.
 
 ### Test Suite
