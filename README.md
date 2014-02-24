@@ -23,8 +23,6 @@ run with any of the following commands:
 
 ```plain
 $ ruby test/bottles_test.rb
-$ rake test
-$ rake
 ```
 
 The test suite is failing, and all but the first test has been
