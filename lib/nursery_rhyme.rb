@@ -13,6 +13,11 @@ class NurseryRhyme
     ['farmer sowing his corn',        'kept'],
     ['horse and the hound and the horn', 'belonged to']
   ]
+
+  def recite
+    (1..PLOT.size).collect {|i| line(i)}.join("\n")
+  end
+
   def line(number)
     "This is#{inner(number)}.\n"
   end
