@@ -8,10 +8,21 @@ class BottlesSong
   end
 
   def verse(number)
-    "#{inventory(number).to_s.capitalize} #{container(number)} of #{liquid} #{location}, " +
-    "#{inventory(number)} #{container(number)} of #{liquid}.\n" +
-    "#{action(number)}, " +
-    "#{inventory(number-1)} #{container(number-1)} of #{liquid} #{location}.\n"
+    BeerVerse.new(number).to_s
+  end
+end
+
+class BeerVerse
+  attr_reader :number
+  def initialize(number)
+    @number = number
+  end
+
+  def to_s
+    "#{current_inventory} #{current_container} of #{liquid} #{location}, ".capitalize +
+    "#{current_inventory} #{current_container} of #{liquid}.\n" +
+    "#{action}, " +
+    "#{remaining_inventory} #{remaining_container} of #{liquid} #{location}.\n"
   end
 
   private
@@ -24,19 +35,17 @@ class BottlesSong
     'on the wall'
   end
 
-  def action(number)
+  def action
     case number
     when 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun(number)} down and pass it around"
+      "Take #{pronoun} down and pass it around"
     end
   end
 
-  def inventory(number)
+  def current_inventory
     case number
-    when -1
-      99
     when 0
       'no more'
     else
@@ -44,7 +53,18 @@ class BottlesSong
     end
   end
 
-  def container(number)
+  def remaining_inventory
+    case number
+    when 0
+      99
+    when 1
+      'no more'
+    else
+      number - 1
+    end
+  end
+
+  def current_container
     case number
     when 1
       'bottle'
@@ -53,7 +73,16 @@ class BottlesSong
     end
   end
 
-  def pronoun(number)
+  def remaining_container
+    case number
+    when 2
+      'bottle'
+    else
+      'bottles'
+    end
+  end
+
+  def pronoun
     case number
     when 1
       'it'
