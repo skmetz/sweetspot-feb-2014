@@ -1,5 +1,6 @@
-class NurseryRhyme
-  PLOT = [
+class Incident < Struct.new(:this_is_the, :that)
+
+  DEFAULT = [
     ['house',   'Jack built'],
     ['malt',    'lay in'],
     ['rat',     'ate'],
@@ -14,8 +15,22 @@ class NurseryRhyme
     ['horse and the hound and the horn', 'belonged to']
   ]
 
+  def self.all(data=DEFAULT)
+    data.collect {|incident| new(*incident)}
+  end
+
+end
+
+
+class NurseryRhyme
+  attr_reader :incidents
+
+  def initialize(incidents=Incident.all)
+    @incidents = incidents
+  end
+
   def recite
-    (1..PLOT.size).collect {|i| line(i)}.join("\n")
+    (1..incidents.size).collect {|i| line(i)}.join("\n")
   end
 
   def line(number)
@@ -24,7 +39,7 @@ class NurseryRhyme
 
   def inner(number)
     (number - 1).downto(0).collect do |i|
-      " the %s that %s" % [PLOT[i][0], PLOT[i][1]]
+      " the %s that %s" % [incidents[i].this_is_the, incidents[i].that]
     end.join('')
   end
 
