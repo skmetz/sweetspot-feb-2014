@@ -22,6 +22,20 @@ class Incident < Struct.new(:this_is_the, :that)
 end
 
 
+class RandomIncident < Incident
+  def self.all(data=Incident::DEFAULT)
+    by_column = data.transpose
+    thises  = by_column[0]
+    thats   = by_column[1]
+
+    random_thises   = thises.shuffle
+    randomish_thats = thats.slice(1..-1).shuffle.unshift(thats.first)
+
+    randomized = [random_thises, randomish_thats].transpose
+    super(randomized)
+  end
+end
+
 class NurseryRhyme
   attr_reader :incidents
 

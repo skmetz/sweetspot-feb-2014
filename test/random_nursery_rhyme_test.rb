@@ -5,7 +5,7 @@ require './lib/nursery_rhyme'
 
 class NurseryRhymeTest < MiniTest::Unit::TestCase
   def rhyme
-    @rhyme = NurseryRhyme.new(Incident.all(data))
+    @rhyme = NurseryRhyme.new(RandomIncident.all(data))
   end
 
   def data
@@ -24,9 +24,9 @@ class NurseryRhymeTest < MiniTest::Unit::TestCase
     ]
   end
 
-  # def setup
-  #   Kernel.srand(17)
-  # end
+  def setup
+    Kernel.srand(17)
+  end
 
   def teardown
     @rhyme = nil
@@ -117,5 +117,4 @@ This is the horse and the hound and the horn that belonged to the farmer sowing 
   end
 
 end
-
 
