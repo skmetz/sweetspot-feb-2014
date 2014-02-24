@@ -19,7 +19,7 @@ _99 Bottles of Beer_.
 ### Test Suite
 
 A test suite is provided in `./test/bottles_test.rb`, and can be
-run with any of the following commands:
+run with the following command:
 
 ```plain
 $ ruby test/bottles_test.rb
