@@ -19,6 +19,10 @@ class BeerVerse
     case number
     when 0
       @fragments = BeerVerseFragments0.new(number)
+    when 1
+      @fragments = BeerVerseFragments1.new(number)
+    when 2
+      @fragments = BeerVerseFragments2.new(number)
     else
       @fragments = BeerVerseFragments.new(number)
     end
@@ -74,52 +78,25 @@ class BeerVerseFragments
   end
 
   def starting_container
-    case number
-    when 1
-      'bottle'
-    else
-      'bottles'
-    end
+    'bottles'
   end
 
   def action
-    case number
-    when 0
-      "Go to the store and buy some more"
-    else
-      "Take #{pronoun} down and pass it around"
-    end
+    "Take #{pronoun} down and pass it around"
   end
 
   def ending_inventory
-    case number
-    when 0
-      99
-    when 1
-      'no more'
-    else
-      number - 1
-    end
+    number - 1
   end
 
   def ending_container
-    case number
-    when 2
-      'bottle'
-    else
-      'bottles'
-    end
+    'bottles'
   end
 
   private
 
   def pronoun
-    case number
-    when 1
-      'it'
-    else
-      'one'
-    end
+    'one'
   end
 end
 
@@ -127,6 +104,40 @@ class BeerVerseFragments0 < BeerVerseFragments
 
   def starting_inventory
     'no more'
+  end
+
+  def action
+    "Go to the store and buy some more"
+  end
+
+  def ending_inventory
+    99
+  end
+
+end
+
+class BeerVerseFragments1 < BeerVerseFragments
+
+  def starting_container
+    'bottle'
+  end
+
+  def ending_inventory
+    'no more'
+  end
+
+  private
+
+  def pronoun
+    'it'
+  end
+
+end
+
+class BeerVerseFragments2 < BeerVerseFragments
+
+  def ending_container
+    'bottle'
   end
 
 end
