@@ -13,16 +13,17 @@ class BottlesSong
 end
 
 class BeerVerse
-  attr_reader :number
+  attr_reader :fragments
+
   def initialize(number)
-    @number = number
+    @fragments = BeerVerseFragments.new(number)
   end
 
   def to_s
-    "#{current_inventory} #{current_container} of #{liquid} #{location}, ".capitalize +
-    "#{current_inventory} #{current_container} of #{liquid}.\n" +
+    "#{starting_inventory} #{starting_container} of #{liquid} #{location}, ".capitalize +
+    "#{starting_inventory} #{starting_container} of #{liquid}.\n" +
     "#{action}, " +
-    "#{remaining_inventory} #{remaining_container} of #{liquid} #{location}.\n"
+    "#{ending_inventory} #{ending_container} of #{liquid} #{location}.\n"
   end
 
   private
@@ -35,6 +36,52 @@ class BeerVerse
     'on the wall'
   end
 
+  def starting_inventory
+    fragments.starting_inventory
+  end
+
+  def starting_container
+    fragments.starting_container
+  end
+
+  def action
+    fragments.action
+  end
+
+  def ending_inventory
+    fragments.ending_inventory
+  end
+
+  def ending_container
+    fragments.ending_container
+  end
+end
+
+class BeerVerseFragments
+  attr_reader :number
+
+  def initialize(number)
+    @number = number
+  end
+
+  def starting_inventory
+    case number
+    when 0
+      'no more'
+    else
+      number
+    end
+  end
+
+  def starting_container
+    case number
+    when 1
+      'bottle'
+    else
+      'bottles'
+    end
+  end
+
   def action
     case number
     when 0
@@ -44,16 +91,7 @@ class BeerVerse
     end
   end
 
-  def current_inventory
-    case number
-    when 0
-      'no more'
-    else
-      number
-    end
-  end
-
-  def remaining_inventory
+  def ending_inventory
     case number
     when 0
       99
@@ -64,16 +102,7 @@ class BeerVerse
     end
   end
 
-  def current_container
-    case number
-    when 1
-      'bottle'
-    else
-      'bottles'
-    end
-  end
-
-  def remaining_container
+  def ending_container
     case number
     when 2
       'bottle'
@@ -81,6 +110,8 @@ class BeerVerse
       'bottles'
     end
   end
+
+  private
 
   def pronoun
     case number
@@ -91,4 +122,3 @@ class BeerVerse
     end
   end
 end
-
