@@ -1,7 +1,7 @@
 gem 'minitest', '~> 4.2'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/bottles'
+require './lib/11_miracle.rb'
 
 class BottlesTest < MiniTest::Unit::TestCase
 
